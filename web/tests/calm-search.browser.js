@@ -1,8 +1,9 @@
 // Run with the Playwright browser_run_code tool's filename argument against the local API.
+// The search lab is at /?view=compare; / is the shop adviser.
 async (page) => {
   const check = (condition, message) => { if (!condition) throw new Error(message); };
   await page.setViewportSize({ width: 1440, height: 1000 });
-  await page.goto('http://127.0.0.1:8001');
+  await page.goto('http://127.0.0.1:8001/?view=compare');
   await page.locator('#search-query').waitFor();
   await page.locator('.example-queries button').first().waitFor();
   check(await page.getByRole('heading', { name: 'Find your next camera.' }).count() === 1, 'The landing page should lead with a simple camera search heading');

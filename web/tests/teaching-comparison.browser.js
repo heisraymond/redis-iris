@@ -1,7 +1,9 @@
 async (page) => {
   const check = (condition, message) => { if (!condition) throw new Error(message); };
   await page.setViewportSize({width:1440,height:1000});
-  await page.goto('http://127.0.0.1:8001');
+  await page.goto('http://127.0.0.1:8001/?view=compare');
+  // Comparison controls live in the collapsed Advanced tray.
+  await page.locator('.advanced-tray > summary').click();
   check(await page.getByText('Compare methods', {exact:true}).count() === 1, 'Provide optional comparison controls');
   await page.getByText('Compare methods', {exact:true}).click();
   check(await page.getByRole('checkbox', {name:'Basic',exact:true}).isChecked(), 'Default to Basic');

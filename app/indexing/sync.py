@@ -12,6 +12,7 @@ from redisvl.index import SearchIndex
 from app.catalog.store import ProductStore
 from app.indexing.failures import SyncFailures
 from app.indexing.passages import PassageEncoder, prepare_product_passages
+from app.redis_json import json_set
 
 logger = logging.getLogger(__name__)
 
@@ -120,11 +121,7 @@ class SyncWorker:
                 if old_keys:
                     pipe.delete(*old_keys)
                 for p in passages:
-                    pipe.json().set(
-                        f"{target['prefix']}:{p.passage_id}",
-                        "$",
-                        p.model_dump(),
-                    )
+                    json_set(pipe, f"{target['prefix']}:{p.passage_id}", p.model_dump())
                 pipe.incrby(target["count_key"], len(passages) - len(old_keys))
             if product is None and client.sismember(self.store.reset_key, pid):
                 pipe.srem(self.store.demo_key, pid)

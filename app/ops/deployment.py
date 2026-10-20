@@ -15,6 +15,7 @@ from app.catalog.store import ProductStore
 from app.indexing.failures import SyncFailures
 from app.indexing.passages import PassageEncoder, prepare_product_passages
 from app.models import Passage
+from app.redis_json import json_get, json_set
 from app.search.queries import build_hybrid_query, build_text_query
 from app.settings import ROOT
 from eval.models import ReviewedCase
@@ -160,7 +161,7 @@ class DeploymentManager:
                     passage: Passage, prefix: str = active["prefix"]
                 ) -> list[float] | None:
                     # Rebuilds use the same pinned model as the serving index.
-                    cached = client.json().get(f"{prefix}:{passage.passage_id}")
+                    cached = json_get(client, f"{prefix}:{passage.passage_id}")
                     if (
                         isinstance(cached, dict)
                         and cached.get("search_text") == passage.search_text
@@ -183,8 +184,8 @@ class DeploymentManager:
                     if old:
                         pipe.delete(*old)
                     for record in records:
-                        pipe.json().set(
-                            f"{target['prefix']}:{record.passage_id}", "$", record.model_dump()
+                        json_set(
+                            pipe, f"{target['prefix']}:{record.passage_id}", record.model_dump()
                         )
                     pipe.incrby(target["count_key"], len(records) - len(old))
                     try:
@@ -248,7 +249,7 @@ class DeploymentManager:
         coverage = set(keys) == set(expected)
         content = coverage
         for key in keys:
-            raw = self.store.client.json().get(key)
+            raw = json_get(self.store.client, key)
             content = (
                 content
                 and isinstance(raw, dict)

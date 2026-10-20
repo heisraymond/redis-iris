@@ -8,6 +8,7 @@ from redis import Redis
 from redis.exceptions import ResponseError
 
 from app.models import CameraProduct
+from app.redis_json import decode_json, json_get, json_set
 from app.settings import Settings
 
 
@@ -81,9 +82,9 @@ class ProductStore:
             return {}
         pipe = self.client.pipeline(transaction=False)
         for pid in unique:
-            pipe.json().get(self.key(pid))
+            json_get(pipe, self.key(pid))
         return {
-            pid: CameraProduct.model_validate(raw)
+            pid: CameraProduct.model_validate(decode_json(raw))
             for pid, raw in zip(unique, pipe.execute(), strict=True)
             if raw is not None
         }
@@ -97,16 +98,16 @@ class ProductStore:
         for offset in range(0, len(keys), 250):
             pipe = self.client.pipeline(transaction=False)
             for key in keys[offset : offset + 250]:
-                pipe.json().get(key)
+                json_get(pipe, key)
             for raw in pipe.execute():
                 if raw is not None:
-                    p = CameraProduct.model_validate(raw)
+                    p = CameraProduct.model_validate(decode_json(raw))
                     products[p.product_id] = p
         return products
 
     def save(self, product: CameraProduct, *, demo: bool = True) -> None:
         with self.client.pipeline(transaction=True) as pipe:
-            pipe.json().set(self.key(product.product_id), "$", product.model_dump())
+            json_set(pipe, self.key(product.product_id), product.model_dump())
             pipe.incr(self.revision_key(product.product_id))
             pipe.incr(self.catalog_revision_key)
             if demo:

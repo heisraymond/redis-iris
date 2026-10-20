@@ -1,5 +1,9 @@
 async (page) => {
   const check = (condition, message) => { if (!condition) throw new Error(message); };
+  await page.goto('http://127.0.0.1:8001/?view=compare');
+  await page.locator('.example-queries button').first().waitFor();
+  // Comparison controls live in the collapsed Advanced tray.
+  await page.locator('.advanced-tray > summary').click();
   await page.getByText('Compare methods', {exact: true}).click();
   await page.getByRole('checkbox', {name: 'Hybrid', exact: true}).check();
   await page.getByRole('checkbox', {name: 'Basic', exact: true}).uncheck();

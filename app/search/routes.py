@@ -13,6 +13,7 @@ from app.models import (
     ProductDetail,
     SearchMode,
 )
+from app.redis_json import json_get
 from app.search.searcher import Searcher
 from app.search.suggestions import get_suggestions, suggestion_key
 
@@ -110,7 +111,7 @@ def product(product_id: str, searcher: SearcherDep) -> ProductDetail:
         passages=[
             PassageEvidence.model_validate(raw)
             for raw in (
-                searcher.store.client.json().get(key)
+                json_get(searcher.store.client, key)
                 for key in searcher.store.passage_keys(product_id)
             )
             if raw is not None

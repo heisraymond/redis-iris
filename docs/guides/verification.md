@@ -10,7 +10,7 @@ make lint
 make test
 make context-test
 npm --prefix web run build
-node --experimental-strip-types --test web/src/**/*.test.mjs
+node --experimental-strip-types --test 'web/src/**/*.test.mjs'
 ```
 
 The shop tests use controlled transports for external services. Passing them does
