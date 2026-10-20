@@ -95,13 +95,23 @@ def main() -> None:
         parquet_rows(args.examples, JUDGEMENT_FIELDS),
         query_ids,
     )
-    for name, rows in (("products", products), ("judgements", judgements)):
-        with gzip.open(bundled / f"{name}.jsonl.gz", "rt") as reference:
+    outputs = (
+        ("products", "data/products.jsonl.gz", products),
+        ("judgements", "data/products-review.jsonl.gz", judgements),
+    )
+    for name, path, rows in outputs:
+        with gzip.open(bundled / path, "rt") as reference:
             verify_source_rows(rows, (json.loads(line) for line in reference), name)
-    args.output.mkdir(parents=True, exist_ok=True)
-    write_jsonl(args.output / "products.jsonl.gz", products)
-    write_jsonl(args.output / "judgements.jsonl.gz", judgements)
-    for name in ("LICENSE.txt", "NOTICE.txt", "query-selection.json", "examples.json"):
+    for directory in ("data", "compliance"):
+        (args.output / directory).mkdir(parents=True, exist_ok=True)
+    for _, path, rows in outputs:
+        write_jsonl(args.output / path, rows)
+    for name in (
+        "compliance/LICENSE.txt",
+        "compliance/NOTICE.txt",
+        "query-selection.json",
+        "examples.json",
+    ):
         (args.output / name).write_bytes((bundled / name).read_bytes())
     manifest = {
         "source": "https://github.com/amazon-science/esci-data",
@@ -115,10 +125,10 @@ def main() -> None:
         "checksums": {
             name: hashlib.sha256((args.output / name).read_bytes()).hexdigest()
             for name in (
-                "LICENSE.txt",
-                "NOTICE.txt",
-                "judgements.jsonl.gz",
-                "products.jsonl.gz",
+                "compliance/LICENSE.txt",
+                "compliance/NOTICE.txt",
+                "data/products-review.jsonl.gz",
+                "data/products.jsonl.gz",
                 "query-selection.json",
             )
         },

@@ -3,7 +3,8 @@
 
 The bundled corpus comes from [Amazon ESCI](https://github.com/amazon-science/esci-data)
 at revision `7916cdf6ab75a462e77f20ab40428a10923998d5`, with its Apache 2.0 license
-and notice in `seed/cameras/`.
+and notice in `seed/cameras/compliance/`. Products and their review labels are in
+`seed/cameras/data/` (`products.jsonl.gz`, `products-review.jsonl.gz`).
 
 | Item | Count |
 |---|---:|

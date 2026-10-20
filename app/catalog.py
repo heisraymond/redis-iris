@@ -161,9 +161,9 @@ class Catalog:
         for name, expected in manifest.checksums.items():
             if hashlib.sha256((directory / name).read_bytes()).hexdigest() != expected:
                 raise ValueError(f"Camera data checksum mismatch: {name}.")
-        with gzip.open(directory / "products.jsonl.gz", "rt") as stream:
+        with gzip.open(directory / "data/products.jsonl.gz", "rt") as stream:
             products = [CameraProduct.model_validate_json(line) for line in stream]
-        with gzip.open(directory / "judgements.jsonl.gz", "rt") as stream:
+        with gzip.open(directory / "data/products-review.jsonl.gz", "rt") as stream:
             judgements = [Judgement.model_validate_json(line) for line in stream]
         by_id = {p.product_id: p for p in products}
         if len(by_id) != len(products) or len(products) != manifest.product_count:
