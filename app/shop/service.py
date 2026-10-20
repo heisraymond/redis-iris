@@ -11,7 +11,7 @@ from pydantic import JsonValue
 from redis.exceptions import RedisError
 
 from app.models import CameraProduct
-from app.search import Searcher
+from app.search.searcher import Searcher
 from app.shop.errors import ShopError
 from app.shop.memory import MemoryGateway, MemoryRecord, MemorySession
 from app.shop.models import (

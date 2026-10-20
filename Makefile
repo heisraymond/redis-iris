@@ -10,7 +10,7 @@ redis: ## Preserve an existing service container and its data
 	docker compose up -d --no-recreate --wait
 
 model: ## Download the pinned local model once; verify cached files afterwards
-	uv run python -m app.embeddings
+	uv run python -m app.indexing.embeddings
 
 seed: ## Bootstrap bundled source records; refuse to overwrite managed live catalogues
 	uv run python -m seed.load

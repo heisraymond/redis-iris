@@ -9,7 +9,7 @@ from fastapi.responses import JSONResponse
 from pydantic import BaseModel, ConfigDict, Field
 from redis.exceptions import RedisError
 
-from app.search import Searcher
+from app.search.searcher import Searcher
 from app.shop.cache import CacheError, RedisAnswerCache
 from app.shop.context_retriever import ContextRetrieverClient, ContextRetrieverError
 from app.shop.errors import ShopError

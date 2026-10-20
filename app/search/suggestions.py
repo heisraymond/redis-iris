@@ -5,7 +5,7 @@ from collections.abc import Iterable
 
 from redis import Redis
 
-from app.catalog import Catalog
+from app.catalog.source import Catalog
 from app.models import CameraProduct
 from app.settings import Settings
 

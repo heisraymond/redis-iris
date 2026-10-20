@@ -8,11 +8,11 @@ import pytest
 from redis import Redis
 from redisvl.index import SearchIndex
 
-from app.catalog import Catalog
-from app.product_store import ProductStore
-from app.search import index_identity
+from app.catalog.source import Catalog
+from app.catalog.store import ProductStore
+from app.indexing.sync import SyncWorker
+from app.search.searcher import index_identity
 from app.settings import Settings
-from app.sync import SyncWorker
 from seed.load import current_manifest, load
 from tests.test_catalog import product, tokenizer
 from tests.test_search import service
@@ -134,8 +134,8 @@ def seed_database(monkeypatch):
     encoder = SeedEncoder()
     monkeypatch.setattr(Catalog, "load", lambda _: catalogue)
     monkeypatch.setattr("seed.load.build_vectorizer", lambda _: encoder)
-    monkeypatch.setattr("app.search.build_vectorizer", lambda _: encoder)
-    monkeypatch.setattr("app.search.load_photos", lambda *_: {})
+    monkeypatch.setattr("app.search.searcher.build_vectorizer", lambda _: encoder)
+    monkeypatch.setattr("app.search.searcher.load_photos", lambda *_: {})
     try:
         yield settings, client, encoder
     finally:
@@ -161,7 +161,7 @@ def test_bootstrap_initializes_passage_accounting(seed_database):
 @pytest.mark.parametrize("indexed", [False, True])
 @pytest.mark.parametrize("alternate", [False, True])
 def test_if_needed_preserves_live_products_and_can_restart(seed_database, indexed, alternate):
-    from app.search import build_searcher
+    from app.search.searcher import build_searcher
 
     settings, client, encoder = seed_database
     manifest = load(settings)

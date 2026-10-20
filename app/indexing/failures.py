@@ -6,7 +6,7 @@ from typing import Any, cast
 from pydantic import BaseModel
 from redis.exceptions import WatchError
 
-from app.product_store import ProductStore
+from app.catalog.store import ProductStore
 
 
 class FailedEvent(BaseModel):

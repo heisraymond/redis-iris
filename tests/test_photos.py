@@ -4,8 +4,8 @@ from pathlib import Path
 
 import pytest
 
-from app.catalog import Catalog
-from app.photos import load_photos
+from app.catalog.photos import load_photos
+from app.catalog.source import Catalog
 from app.settings import ROOT
 
 

@@ -10,7 +10,7 @@ from typing import Literal
 
 import httpx
 
-from app.traffic import TrafficMetrics, TrafficRequest, TrafficRun, local_target
+from app.ops.traffic import TrafficMetrics, TrafficRequest, TrafficRun, local_target
 
 WORKLOAD = (
     {"query": "Sony Alpha a7", "brands": [], "colors": [], "num_results": 6},

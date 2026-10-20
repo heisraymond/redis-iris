@@ -6,9 +6,9 @@ import os
 import pytest
 from fastapi.testclient import TestClient
 
-from app.catalog import clean_text
+from app.catalog.source import clean_text
 from app.main import create_app
-from app.search import build_searcher
+from app.search.searcher import build_searcher
 from app.settings import Settings
 
 pytestmark = pytest.mark.skipif(

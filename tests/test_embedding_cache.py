@@ -1,4 +1,4 @@
-from app.embedding_cache import EmbeddingCache
+from app.search.embedding_cache import EmbeddingCache
 
 
 def test_cache_reuses_only_same_model_and_exact_query() -> None:

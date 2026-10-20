@@ -7,10 +7,10 @@ from types import FrameType
 from redis import Redis
 from redisvl.index import SearchIndex
 
-from app.embeddings import build_vectorizer
-from app.product_store import ProductStore
+from app.catalog.store import ProductStore
+from app.indexing.embeddings import build_vectorizer
+from app.indexing.sync import SyncWorker
 from app.settings import get_settings
-from app.sync import SyncWorker
 
 
 def main() -> None:

@@ -8,7 +8,7 @@ from pathlib import Path
 import yaml
 
 from app.models import CompareRequest
-from app.search import build_searcher
+from app.search.searcher import build_searcher
 from app.settings import ROOT
 from eval.models import ReviewedCase, assess
 

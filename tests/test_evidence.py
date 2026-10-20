@@ -1,6 +1,6 @@
 import pytest
 
-from app.evidence import explain_fusion, literal_query_matches
+from app.search.evidence import explain_fusion, literal_query_matches
 
 
 def test_literal_overlap_preserves_unicode_offsets_and_excludes_stopwords() -> None:

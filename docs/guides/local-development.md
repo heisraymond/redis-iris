@@ -309,19 +309,19 @@ Follow the request path for the feature you want to explore:
 | Read | Responsibility |
 |---|---|
 | [app/main.py](../../app/main.py) | App assembly, service lifetime, and static frontend |
-| [app/search_routes.py](../../app/search_routes.py) | Search HTTP endpoints and readiness |
+| [app/search/routes.py](../../app/search/routes.py) | Search HTTP endpoints and readiness |
 | [app/shop/service.py](../../app/shop/service.py) | One adviser turn: context, reuse or generation, persistence |
 | [app/shop/tools.py](../../app/shop/tools.py) | Catalogue/MCP tools and deferred cache nomination |
 | [app/shop/reuse.py](../../app/shop/reuse.py) | Semantic-cache eligibility and answer applicability |
 | [app/shop/routes.py](../../app/shop/routes.py) | Adviser HTTP API and dependency construction |
 | [app/shop/context_retriever.py](../../app/shop/context_retriever.py) | Scoped MCP discovery, schema validation, tool execution and safe retrieval errors |
 | [app/runtime.py](../../app/runtime.py) | Starts and restarts API and worker processes |
-| [app/sync.py](../../app/sync.py) | Stream consumption, passage updates and recovery |
-| [app/queries.py](../../app/queries.py) | Full-text, vector, and hybrid RedisVL query builders for the live demo |
-| [app/search.py](../../app/search.py) | Embedding, shared filters, query execution, and product ranking |
-| [app/evidence.py](../../app/evidence.py) | Literal text matches and verified hybrid contributions |
-| [app/catalog.py](../../app/catalog.py) | Original records, text cleaning, bounded passages |
-| [app/embeddings.py](../../app/embeddings.py) | Pinned local model and embedding generation |
+| [app/indexing/sync.py](../../app/indexing/sync.py) | Stream consumption, passage updates and recovery |
+| [app/search/queries.py](../../app/search/queries.py) | Full-text, vector, and hybrid RedisVL query builders for the live demo |
+| [app/search/searcher.py](../../app/search/searcher.py) | Embedding, shared filters, query execution, and product ranking |
+| [app/search/evidence.py](../../app/search/evidence.py) | Literal text matches and verified hybrid contributions |
+| [app/catalog/source.py](../../app/catalog/source.py) | Original records, text cleaning, bounded passages |
+| [app/indexing/embeddings.py](../../app/indexing/embeddings.py) | Pinned local model and embedding generation |
 | [seed/load.py](../../seed/load.py) | Load records and build the [passage index](../../schemas/passages.yaml) |
 | [web/src/main.tsx](../../web/src/main.tsx) | React comparison page and shared inspector |
 

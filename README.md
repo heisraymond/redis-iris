@@ -6,7 +6,7 @@ answer, then see when a previous answer can be reused for the same shopper.
 
 | Lesson | What you can see | Start reading |
 | --- | --- | --- |
-| Search | One catalogue queried with keywords, vectors and hybrid search | [`Searcher.compare`](app/search.py) |
+| Search | One catalogue queried with keywords, vectors and hybrid search | [`Searcher.compare`](app/search/searcher.py) |
 | Agent memory | Session history and relevant memories supplied to an adviser turn | [`ShopService.turn`](app/shop/service.py) |
 | Context Retriever | The adviser choosing scoped tools for purchases and deliveries | [`ShopRetrieval.call`](app/shop/tools.py) |
 | Semantic caching | RedisVL finds a scoped candidate; Jev checks whether its answer still fits | [`AnswerReuse.find`](app/shop/reuse.py) |

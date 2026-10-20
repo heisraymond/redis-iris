@@ -8,7 +8,7 @@ from redisvl.query import HybridQuery, TextQuery, VectorQuery
 from redisvl.query.filter import FilterExpression
 from redisvl.query.hybrid import build_base_query
 
-from app.constants import RRF_CONSTANT
+from app.search.constants import RRF_CONSTANT
 
 PASSAGE_FIELDS = ["passage_id", "field", "text", "start", "end"]
 RETURN_FIELDS = ["title", "brand", "color", "product_id", *PASSAGE_FIELDS, "search_text"]

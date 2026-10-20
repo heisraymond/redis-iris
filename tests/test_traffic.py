@@ -6,7 +6,7 @@ from pathlib import Path
 import pytest
 from pydantic import ValidationError
 
-from app.traffic import TrafficController, TrafficRequest, local_target
+from app.ops.traffic import TrafficController, TrafficRequest, local_target
 from scripts.search_load import Sample, summarize
 
 

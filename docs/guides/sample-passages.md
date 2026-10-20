@@ -1,7 +1,7 @@
 # Sample camera catalogue passages
 
 Actual records generated from the bundled catalogue by
-[`make_passages`](../../app/catalog.py), using the pinned MiniLM tokenizer and the
+[`make_passages`](../../app/catalog/source.py), using the pinned MiniLM tokenizer and the
 default 240-token indexed-text budget / 32-token overlap. Generated 2026-09-15.
 This is a documentation snapshot, not an input to the seed loader.
 

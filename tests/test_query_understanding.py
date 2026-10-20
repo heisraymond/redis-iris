@@ -2,7 +2,7 @@ import pytest
 from fastapi.testclient import TestClient
 
 from app.main import create_app
-from app.query_understanding import infer_brand
+from app.search.query_understanding import infer_brand
 from tests.test_search import service
 
 

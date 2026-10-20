@@ -4,10 +4,10 @@ import pytest
 import yaml
 from fastapi.testclient import TestClient
 
-from app.catalog import make_passages
+from app.catalog.source import make_passages
 from app.main import create_app
 from app.models import CameraProduct, CompareRequest, SearchMode
-from app.search import index_identity
+from app.search.searcher import index_identity
 from app.settings import ROOT
 from tests.test_catalog import product, tokenizer
 from tests.test_search import Index, service

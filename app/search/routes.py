@@ -1,4 +1,4 @@
-"""Search lab HTTP endpoints; ranking and evidence live in app.search."""
+"""Search lab HTTP endpoints; ranking and evidence live in app.search.searcher."""
 
 from typing import Annotated
 
@@ -13,8 +13,8 @@ from app.models import (
     ProductDetail,
     SearchMode,
 )
-from app.search import Searcher
-from app.suggestions import get_suggestions, suggestion_key
+from app.search.searcher import Searcher
+from app.search.suggestions import get_suggestions, suggestion_key
 
 router = APIRouter()
 

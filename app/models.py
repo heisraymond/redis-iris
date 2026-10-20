@@ -5,7 +5,7 @@ from typing import Literal
 
 from pydantic import BaseModel, ConfigDict, Field, field_validator
 
-from app.constants import RRF_CONSTANT
+from app.search.constants import RRF_CONSTANT
 
 Label = Literal["E", "S", "C", "I"]
 SourceField = Literal["product_title", "product_description", "product_bullet_point"]

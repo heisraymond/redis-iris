@@ -16,10 +16,10 @@ from redisvl.query import HybridQuery, TextQuery, VectorQuery
 from redisvl.query.filter import FilterExpression, Tag
 from redisvl.redis.utils import convert_bytes
 
-from app.catalog import Catalog, make_passages
-from app.embedding_cache import EmbeddingCache
-from app.embeddings import build_vectorizer
-from app.evidence import explain_fusion, literal_query_matches
+from app.catalog.photos import load_photos
+from app.catalog.source import Catalog, make_passages
+from app.catalog.store import IndexTarget, ProductStore
+from app.indexing.embeddings import build_vectorizer
 from app.models import (
     CameraProduct,
     CatalogInfo,
@@ -37,16 +37,16 @@ from app.models import (
     SearchMode,
     normalize_color,
 )
-from app.photos import load_photos
-from app.product_store import IndexTarget, ProductStore
-from app.queries import (
+from app.search.embedding_cache import EmbeddingCache
+from app.search.evidence import explain_fusion, literal_query_matches
+from app.search.queries import (
     build_hybrid_query,
     build_text_query,
     build_vector_query,
 )
-from app.query_understanding import infer_brand
+from app.search.query_understanding import infer_brand
+from app.search.suggestions import prepare_suggestions
 from app.settings import ROOT, Settings, get_settings
-from app.suggestions import prepare_suggestions
 
 SCORE_KINDS = {
     SearchMode.TEXT: "BM25",

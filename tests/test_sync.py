@@ -8,11 +8,11 @@ import yaml
 from redis import Redis
 from redisvl.index import SearchIndex
 
-from app.embeddings import build_vectorizer
+from app.catalog.store import ProductStore
+from app.indexing.embeddings import build_vectorizer
+from app.indexing.sync import SyncWorker
 from app.models import CameraProduct
-from app.product_store import ProductStore
 from app.settings import ROOT, Settings
-from app.sync import SyncWorker
 from seed.load import configure_schema
 
 pytestmark = pytest.mark.skipif(not os.getenv("TEST_REDIS_URL"), reason="Set TEST_REDIS_URL")
@@ -127,9 +127,9 @@ def test_reset_only_deletes_demo_products(lab):
 
 
 def test_real_search_visibility_and_stale_indexed_view(lab):
-    from app.catalog import Catalog, DataManifest
+    from app.catalog.source import Catalog, DataManifest
     from app.models import CompareRequest
-    from app.search import Searcher
+    from app.search.searcher import Searcher
 
     store, worker, index = lab
     catalogue = Catalog(

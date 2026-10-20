@@ -10,7 +10,7 @@ from context_surfaces.context_model import (
 )
 from pydantic import BaseModel, ConfigDict, JsonValue, TypeAdapter
 
-from app.catalog import Catalog
+from app.catalog.source import Catalog
 from app.settings import ROOT
 
 PREFIX = "camera:context-smoke"

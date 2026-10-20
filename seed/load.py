@@ -10,10 +10,10 @@ from redis import Redis
 from redis.exceptions import ResponseError
 from redisvl.index import SearchIndex
 
-from app.catalog import Catalog
-from app.embeddings import build_vectorizer
-from app.indexing import prepare_product_passages
-from app.search import index_identity, serving_target
+from app.catalog.source import Catalog
+from app.indexing.embeddings import build_vectorizer
+from app.indexing.passages import prepare_product_passages
+from app.search.searcher import index_identity, serving_target
 from app.settings import ROOT, Settings, get_settings
 
 

@@ -9,9 +9,9 @@ from redis.exceptions import ConnectionError, LockError, RedisError, TimeoutErro
 from redis.lock import Lock
 from redisvl.index import SearchIndex
 
-from app.failures import SyncFailures
-from app.indexing import PassageEncoder, prepare_product_passages
-from app.product_store import ProductStore
+from app.catalog.store import ProductStore
+from app.indexing.failures import SyncFailures
+from app.indexing.passages import PassageEncoder, prepare_product_passages
 
 logger = logging.getLogger(__name__)
 

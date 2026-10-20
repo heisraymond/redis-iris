@@ -10,12 +10,12 @@ from fastapi import APIRouter, HTTPException, Request
 from redis.exceptions import RedisError, WatchError
 from redisvl.index import SearchIndex
 
-from app.catalog import make_passages
-from app.failures import SyncFailures
-from app.indexing import PassageEncoder, prepare_product_passages
+from app.catalog.source import make_passages
+from app.catalog.store import ProductStore
+from app.indexing.failures import SyncFailures
+from app.indexing.passages import PassageEncoder, prepare_product_passages
 from app.models import Passage
-from app.product_store import ProductStore
-from app.queries import build_hybrid_query, build_text_query
+from app.search.queries import build_hybrid_query, build_text_query
 from app.settings import ROOT
 from eval.models import ReviewedCase
 
@@ -306,7 +306,7 @@ class DeploymentManager:
 
     def _quality_checks(self, index: SearchIndex, product_ids: set[str]) -> list[dict[str, Any]]:
         """Run the existing reviewed top-three expectations against this candidate."""
-        from app.search import normalize_lexical_query
+        from app.search.searcher import normalize_lexical_query
 
         checks: list[dict[str, Any]] = []
         cases = [

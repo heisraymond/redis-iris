@@ -6,10 +6,10 @@ from redis.commands.search.hybrid_result import HybridResult
 from redis.exceptions import ResponseError
 from redisvl.index import SearchIndex
 
-from app.catalog import Catalog, DataManifest
+from app.catalog.source import Catalog, DataManifest
+from app.catalog.store import IndexTarget, ProductStore
 from app.models import CameraProduct, CompareRequest, Judgement, SearchMode
-from app.product_store import IndexTarget, ProductStore
-from app.search import Searcher
+from app.search.searcher import Searcher
 from app.settings import Settings
 
 

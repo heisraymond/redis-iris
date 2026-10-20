@@ -11,7 +11,7 @@ from redis import Redis
 
 pytest.importorskip("context_surfaces", reason="Install the context-retriever extra")
 
-from app.catalog import Catalog  # noqa: E402
+from app.catalog.source import Catalog  # noqa: E402
 from app.settings import ROOT  # noqa: E402
 from seed import shop_context  # noqa: E402
 

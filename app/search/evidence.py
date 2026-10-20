@@ -6,8 +6,8 @@ from collections import defaultdict
 from collections.abc import Collection
 from typing import Any
 
-from app.constants import RRF_CONSTANT
 from app.models import FusionEvidence, TextSpan
+from app.search.constants import RRF_CONSTANT
 
 
 def literal_query_matches(text: str, query: str, stopwords: Collection[str]) -> list[TextSpan]:

@@ -5,7 +5,7 @@ from typing import Protocol
 
 from tokenizers import Tokenizer
 
-from app.catalog import make_passages
+from app.catalog.source import make_passages
 from app.models import CameraProduct, Passage
 from app.settings import Settings
 

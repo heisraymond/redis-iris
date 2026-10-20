@@ -4,7 +4,7 @@ import os
 
 import pytest
 
-from app.deployment import DeploymentManager
+from app.ops.deployment import DeploymentManager
 from tests.test_sync import encoder, lab, product  # noqa: F401
 
 pytestmark = [pytest.mark.skipif(not os.getenv("TEST_REDIS_URL"), reason="Set TEST_REDIS_URL")]
@@ -125,9 +125,9 @@ def test_missing_retained_passage_blocks_rollback(lab):  # noqa: F811
 
 
 def test_cleanup_during_inflight_comparison_retries_current_index(lab):  # noqa: F811
-    from app.catalog import Catalog
+    from app.catalog.source import Catalog
     from app.models import CompareRequest
-    from app.search import Searcher
+    from app.search.searcher import Searcher
 
     store, worker, index = lab
     store.save(product())

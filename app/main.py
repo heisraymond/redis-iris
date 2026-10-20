@@ -11,12 +11,15 @@ from fastapi.staticfiles import StaticFiles
 from redis.exceptions import RedisError
 from redisvl.exceptions import RedisVLError
 
-from app.deployment import DeploymentManager
-from app.deployment import router as deployment_router
-from app.freshness_routes import router as lab_router
-from app.indexing import PassageEncoder
-from app.search import Searcher, build_searcher
-from app.search_routes import router as search_router
+from app.indexing.passages import PassageEncoder
+from app.indexing.routes import router as lab_router
+from app.indexing.sync import SyncWorker
+from app.ops.deployment import DeploymentManager
+from app.ops.deployment import router as deployment_router
+from app.ops.traffic import router as traffic_router
+from app.ops.traffic import stop_traffic
+from app.search.routes import router as search_router
+from app.search.searcher import Searcher, build_searcher
 from app.settings import ROOT
 from app.shop.context_retriever import ContextRetrieverError
 from app.shop.errors import ShopError
@@ -24,9 +27,6 @@ from app.shop.memory import MemoryError
 from app.shop.routes import build_shop, close_shop, shop_error_handler
 from app.shop.routes import router as shop_router
 from app.shop.service import ShopService
-from app.sync import SyncWorker
-from app.traffic import router as traffic_router
-from app.traffic import stop_traffic
 
 
 def create_app(

@@ -6,9 +6,9 @@ from uuid import uuid4
 from fastapi import APIRouter, Depends, HTTPException, Request
 from pydantic import BaseModel, ConfigDict, Field, field_validator
 
-from app.failures import FailedEvent
+from app.indexing.failures import FailedEvent
+from app.indexing.sync import SyncWorker
 from app.models import CameraProduct
-from app.sync import SyncWorker
 
 router = APIRouter(prefix="/api/lab", tags=["Production lab"])
 

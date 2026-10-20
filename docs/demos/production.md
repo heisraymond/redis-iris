@@ -105,11 +105,11 @@ clean up the candidate and rebuild while the original continues serving.
 
 ## Code map
 
-- `app/product_store.py`: live products, revisions and transactional Stream events.
-- `app/sync.py`: pause, replay, passage replacement and acknowledgment.
-- `app/embedding_cache.py`: exact-query vector reuse with bounded memory.
-- `app/traffic.py` / `scripts/search_load.py`: bounded subprocess and HTTP metrics.
-- `app/deployment.py`: version lifecycle, validation, promotion and cleanup.
+- `app/catalog/store.py`: live products, revisions and transactional Stream events.
+- `app/indexing/sync.py`: pause, replay, passage replacement and acknowledgment.
+- `app/search/embedding_cache.py`: exact-query vector reuse with bounded memory.
+- `app/ops/traffic.py` / `scripts/search_load.py`: bounded subprocess and HTTP metrics.
+- `app/ops/deployment.py`: version lifecycle, validation, promotion and cleanup.
 - `web/src/ProductionLab.tsx`, `TrafficLab.tsx`, `DeploymentLab.tsx`: collapsed controls.
 
 ## Verification and boundaries
@@ -144,4 +144,4 @@ requests are left unfiltered. The original text remains intact for model matchin
 and evidence. This is deliberately conservative and does not infer specs or price.
 The removable “From your query” chip disables inference for that query in the tab.
 API callers opt in with `interpret_brand: true`; evals and traffic retain their
-explicit filter configuration. Rules live in `app/query_understanding.py`.
+explicit filter configuration. Rules live in `app/search/query_understanding.py`.

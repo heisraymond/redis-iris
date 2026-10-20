@@ -1,5 +1,5 @@
 from app.models import CameraProduct
-from app.suggestions import suggestion_entries
+from app.search.suggestions import suggestion_entries
 
 
 def test_suggestions_use_titles_and_brands_counted_once_per_product() -> None:

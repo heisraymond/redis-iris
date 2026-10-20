@@ -98,11 +98,11 @@ You can explore these independently of the cloud adviser services:
 
 | Read in this order | What to follow |
 | --- | --- |
-| [`search_routes.py`](../../app/search_routes.py) → [`Searcher.compare`](../../app/search.py) | HTTP input → query preparation → requested retrieval methods → ranked product evidence |
-| [`queries.py`](../../app/queries.py) | RedisVL lexical, vector and hybrid query construction with common filters |
-| [`evidence.py`](../../app/evidence.py) | Literal matches and verified hybrid score contributions |
-| [`product_store.py`](../../app/product_store.py) → [`SyncWorker.process_one`](../../app/sync.py) | Source write and Stream event → current product state → passage replacement and acknowledgement in one transaction |
-| [`DeploymentManager.validate`](../../app/deployment.py) | Candidate content/vector checks → retrieval checks → confirmation that the source revision stayed unchanged |
+| [`search/routes.py`](../../app/search/routes.py) → [`Searcher.compare`](../../app/search/searcher.py) | HTTP input → query preparation → requested retrieval methods → ranked product evidence |
+| [`search/queries.py`](../../app/search/queries.py) | RedisVL lexical, vector and hybrid query construction with common filters |
+| [`search/evidence.py`](../../app/search/evidence.py) | Literal matches and verified hybrid score contributions |
+| [`catalog/store.py`](../../app/catalog/store.py) → [`SyncWorker.process_one`](../../app/indexing/sync.py) | Source write and Stream event → current product state → passage replacement and acknowledgement in one transaction |
+| [`DeploymentManager.validate`](../../app/ops/deployment.py) | Candidate content/vector checks → retrieval checks → confirmation that the source revision stayed unchanged |
 | [`main.py`](../../app/main.py) | Application assembly and shared resource startup/shutdown |
 
 The indexing Stream handles catalogue updates. It does not invalidate cached

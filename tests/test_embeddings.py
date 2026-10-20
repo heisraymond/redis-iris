@@ -5,14 +5,14 @@ from pathlib import Path
 import numpy as np
 import pytest
 
-from app.embeddings import LocalEncoder, resolve_model
+from app.indexing.embeddings import LocalEncoder, resolve_model
 from app.settings import Settings
 
 
 def test_model_preparation_reuses_verified_cache_without_network(
     tmp_path: Path, monkeypatch: pytest.MonkeyPatch
 ) -> None:
-    from app import embeddings
+    from app.indexing import embeddings
 
     (tmp_path / "seed").mkdir()
     (tmp_path / "model.onnx").write_bytes(b"model")

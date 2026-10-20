@@ -2,7 +2,7 @@ from tokenizers import Tokenizer
 from tokenizers.models import WordLevel
 from tokenizers.pre_tokenizers import Whitespace
 
-from app.catalog import clean_text, make_passages
+from app.catalog.source import clean_text, make_passages
 from app.models import CameraProduct
 
 

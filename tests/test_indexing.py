@@ -1,7 +1,7 @@
 import pytest
 
-from app.catalog import make_passages
-from app.indexing import prepare_product_passages
+from app.catalog.source import make_passages
+from app.indexing.passages import prepare_product_passages
 from app.settings import Settings
 from tests.test_catalog import product, tokenizer
 
