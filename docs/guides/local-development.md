@@ -323,10 +323,10 @@ Follow the request path for the feature you want to explore:
 | [app/catalog/source.py](../../app/catalog/source.py) | Original records, text cleaning, bounded passages |
 | [app/indexing/embeddings.py](../../app/indexing/embeddings.py) | Pinned local model and embedding generation |
 | [seed/load.py](../../seed/load.py) | Load records and build the [passage index](../../schemas/passages.yaml) |
-| [web/src/main.tsx](../../web/src/main.tsx) | React comparison page and shared inspector |
+| [web/src/main.tsx](../../web/src/main.tsx) | Picks the page (shop, search, product, manage) from `?view=`; features live in `web/src/{shop,search,manage,shared}/` |
 
 `app/models.py` defines the typed boundaries; `app/settings.py` holds configuration.
-`tests/` covers the backend, and `web/src/*.test.mjs` covers frontend logic.
+`tests/` covers the backend, and `web/src/**/*.test.mjs` covers frontend logic.
 `seed/cameras/` holds the canonical source bundle and provenance; `seed/photos/`
 holds attributed reference photos. `scripts/prepare_cameras.py` reproduces the
 source subset. `eval/` contains assistant-reviewed cases and recorded observations. See [evaluation guide](../../eval/README.md) for targets, checks, and limitations.

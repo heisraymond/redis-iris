@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { errorMessage, requestJSON } from "./api";
+import { errorMessage, requestJSON } from "../shared/api.ts";
 import {
   shopPost,
   type Memory,
@@ -7,10 +7,10 @@ import {
   type Session,
   type Shopper,
   type Turn,
-} from "./shop-api";
-import { compareMemories } from "./shop-evidence";
-import { CacheEvidence } from "./CacheEvidence";
-import type { CacheRemovalTarget } from "./cache-evidence";
+} from "./shop-api.ts";
+import { compareMemories } from "./shop-evidence.ts";
+import { CacheEvidence } from "./CacheEvidence.tsx";
+import type { CacheRemovalTarget } from "./cache-evidence.ts";
 
 type InspectorProps = {
   shopper: Shopper;

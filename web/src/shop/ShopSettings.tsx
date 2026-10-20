@@ -1,7 +1,7 @@
 import { useRef, useState } from "react";
-import { errorMessage } from "./api";
-import { cacheReadiness } from "./cache-evidence";
-import { shopPost, type MemoryMode, type Shopper, type ShopStatus } from "./shop-api";
+import { errorMessage } from "../shared/api.ts";
+import { cacheReadiness } from "./cache-evidence.ts";
+import { shopPost, type MemoryMode, type Shopper, type ShopStatus } from "./shop-api.ts";
 
 type ShopSettingsProps = {
   shopper: Shopper;

@@ -1,12 +1,12 @@
 import assert from "node:assert/strict";
 import { test } from "node:test";
-import * as learning from "./learning.ts";
+import * as learning from "./ranking.ts";
 import {
   highlightSegments,
   rankForProduct,
   selectionAcrossModes,
   visibleProductUnion,
-} from "./learning.ts";
+} from "./ranking.ts";
 
 const hit = (id, passage = `${id}-passage`) => ({
   product_id: id,

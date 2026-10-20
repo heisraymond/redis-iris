@@ -1,4 +1,4 @@
-import type { Catalog } from "./api";
+import type { Catalog } from "../shared/api.ts";
 
 export function SearchFilters({ catalog, brand, onChange }: {
   catalog: Catalog | null;

@@ -1,13 +1,13 @@
 import { useEffect, useRef, useState, type RefObject } from "react";
-import { ProductPhotoView } from "./ProductPhoto";
-import { ModelEvidence } from "./ModelEvidence";
-import { ShopInspector } from "./ShopInspector";
-import { ShopSettings } from "./ShopSettings";
-import { useShopConversation } from "./useShopConversation";
-import type { MemoryMode, Session, Shopper, Turn } from "./shop-api";
+import { ProductPhotoView } from "../shared/ProductPhoto.tsx";
+import { ModelEvidence } from "./ModelEvidence.tsx";
+import { ShopInspector } from "./ShopInspector.tsx";
+import { ShopSettings } from "./ShopSettings.tsx";
+import { useShopConversation } from "./useShopConversation.ts";
+import type { MemoryMode, Session, Shopper, Turn } from "./shop-api.ts";
 import "./shop.css";
 
-export function Shop() {
+export function ShopPage() {
   const [shopper, setShopper] = useState<Shopper>("alex");
   return (
     <div className="app-shell shop-shell">

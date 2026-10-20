@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
-import { errorMessage, requestJSON } from "./api";
-import "./production.css";
+import { errorMessage, requestJSON } from "../shared/api.ts";
+import "./labs.css";
 
 type LabStatus = {
   paused: boolean;
@@ -13,7 +13,7 @@ type LabStatus = {
   active_index: string;
 };
 
-type ProductionLabProps = {
+type FreshnessLabProps = {
   onChanged?: () => void;
   initiallyOpen?: boolean;
   onSearch: (query: string) => void;
@@ -27,7 +27,7 @@ const defaultProduct = {
   features: "Fictional demo features: flip-out screen, interchangeable lenses, and a lightweight white body. Not a real product.",
 };
 
-export function ProductionLab({ onChanged, onSearch, initiallyOpen = false }: ProductionLabProps) {
+export function FreshnessLab({ onChanged, onSearch, initiallyOpen = false }: FreshnessLabProps) {
   const [expanded, setExpanded] = useState(initiallyOpen);
   const [status, setStatus] = useState<LabStatus | null>(null);
   const [product, setProduct] = useState(defaultProduct);
@@ -105,59 +105,59 @@ export function ProductionLab({ onChanged, onSearch, initiallyOpen = false }: Pr
     }
   }
 
-  return <details className="production-lab" open={expanded} onToggle={(event) => setExpanded(event.currentTarget.open)}>
-    <summary>Production lab</summary>
-    <section className="production-content" aria-labelledby="freshness-heading" aria-busy={busy}>
-      <header className="production-heading"><h2 id="freshness-heading">Freshness</h2><span>Source → stream → search index</span></header>
-      <p className="production-help">Pause indexing, add a demo camera, then search for it. Resume to see its passages appear. Delete it while paused to explore stale records.</p>
-      {(connectionError || mutationError || status?.last_error) && <div className="production-error" role="alert">{mutationError || connectionError || status?.last_error}</div>}
-      {!status && <p className="production-help" role="status">{connectionError ? "Waiting for the lab service. Retrying automatically…" : "Loading freshness status…"}</p>}
+  return <details className="lab-panel" open={expanded} onToggle={(event) => setExpanded(event.currentTarget.open)}>
+    <summary>Freshness lab</summary>
+    <section className="lab-content" aria-labelledby="freshness-heading" aria-busy={busy}>
+      <header className="lab-heading"><h2 id="freshness-heading">Freshness</h2><span>Source → stream → search index</span></header>
+      <p className="lab-help">Pause indexing, add a demo camera, then search for it. Resume to see its passages appear. Delete it while paused to explore stale records.</p>
+      {(connectionError || mutationError || status?.last_error) && <div className="lab-error" role="alert">{mutationError || connectionError || status?.last_error}</div>}
+      {!status && <p className="lab-help" role="status">{connectionError ? "Waiting for the lab service. Retrying automatically…" : "Loading freshness status…"}</p>}
       {status && <>
-        <div className="production-status" role="status">
+        <div className="lab-status" role="status">
           <strong>{status.paused ? "Indexing paused" : "Indexer running"}</strong>
           <span>{status.unread} unread · {status.pending} pending · {status.failed_count} failed</span>
         </div>
-        <div className="production-actions">
+        <div className="lab-actions">
           <button type="button" disabled={busy} onClick={() => void mutate("/lab/pause", "POST", { paused: !status.paused })}>{status.paused ? "Resume indexing" : "Pause indexing"}</button>
           <button type="button" disabled={busy} onClick={() => void mutate("/lab/reset", "POST")}>Reset demo</button>
           {busy && <span role="status">Applying change…</span>}
         </div>
-        <p className="production-help">Unread events await processing. Pending events have been received but are not yet acknowledged. Reset removes the demo products.</p>
+        <p className="lab-help">Unread events await processing. Pending events have been received but are not yet acknowledged. Reset removes the demo products.</p>
         {status.failed_count > 0 && <section aria-label="Failed indexing changes">
           <h3>Failed changes ({status.failed_count})</h3>
           <p>These changes need attention after three failed attempts. Fix the cause, then retry the product’s current state. Showing the latest 50.</p>
-          <ul className="production-products">
+          <ul className="lab-products">
             {status.failures.map((failure) => <li key={failure.event_id}>
               <div><strong>{failure.product_id}</strong><p>{failure.error}</p><p>{failure.attempts} attempts · Event {failure.original_event_id}</p></div>
               <button type="button" disabled={busy} onClick={() => void mutate(`/lab/failures/${encodeURIComponent(failure.event_id)}/retry`, "POST")}>Retry</button>
             </li>)}
           </ul>
         </section>}
-        <form className="production-form" onSubmit={(event) => { event.preventDefault(); void mutate("/lab/products", "POST", product); }}>
+        <form className="lab-form" onSubmit={(event) => { event.preventDefault(); void mutate("/lab/products", "POST", product); }}>
           <fieldset disabled={busy}>
             <legend>Add a fictional camera</legend>
-            <label className="production-title-field">Title<input required maxLength={200} value={product.title} onChange={(event) => setProduct({ ...product, title: event.target.value })} /></label>
-            <div className="production-fields">
+            <label className="lab-title-field">Title<input required maxLength={200} value={product.title} onChange={(event) => setProduct({ ...product, title: event.target.value })} /></label>
+            <div className="lab-fields">
               <label>Brand<input required maxLength={100} value={product.brand} onChange={(event) => setProduct({ ...product, brand: event.target.value })} /></label>
               <label>Colour<input required maxLength={100} value={product.color} onChange={(event) => setProduct({ ...product, color: event.target.value })} /></label>
             </div>
-            <details className="production-description"><summary>Description and features</summary>
+            <details className="lab-description"><summary>Description and features</summary>
               <label>Description<textarea required rows={3} maxLength={4000} value={product.description} onChange={(event) => setProduct({ ...product, description: event.target.value })} /></label>
               <label>Features<textarea required rows={3} maxLength={4000} value={product.features} onChange={(event) => setProduct({ ...product, features: event.target.value })} /></label>
             </details>
             <button type="submit" disabled={!product.title.trim() || !product.brand.trim() || !product.color.trim() || !product.description.trim() || !product.features.trim()}>Add demo camera</button>
           </fieldset>
         </form>
-        {status.products.length > 0 ? <ul className="production-products" aria-label="Demo products">
+        {status.products.length > 0 ? <ul className="lab-products" aria-label="Demo products">
           {status.products.map((item) => <li key={item.product_id}>
             <div><strong>{item.title}</strong><p>Source: {item.exists ? "exists" : "deleted"} · Index: {item.passage_count} {item.passage_count === 1 ? "passage" : "passages"}</p></div>
-            <div className="production-actions">
+            <div className="lab-actions">
               <button type="button" disabled={busy} onClick={() => onSearch(item.title)} aria-label={`Search for ${item.title}`}>Search</button>
               <button type="button" disabled={busy || !item.exists} onClick={() => void mutate(`/lab/products/${encodeURIComponent(item.product_id)}`, "DELETE")} aria-label={`Delete ${item.title} from source`}>Delete</button>
             </div>
           </li>)}
-        </ul> : <p className="production-help">No demo products yet. Add one above to begin.</p>}
-        <p className="production-index">Active index <code>{status.active_index}</code></p>
+        </ul> : <p className="lab-help">No demo products yet. Add one above to begin.</p>}
+        <p className="lab-index">Active index <code>{status.active_index}</code></p>
       </>}
     </section>
   </details>;

@@ -1,25 +1,8 @@
-import type { Comparison, Hit, Mode, SourceLabel } from "./api";
-import type { ProductRank, VisibleCount } from "./learning";
-import { HighlightedText } from "./HighlightedText";
-import { ProductPhotoView } from "./ProductPhoto";
-
-export const methods: { mode: Mode; name: string; hint: string; explanation: string }[] = [
-  { mode: "basic", name: "Basic", hint: "Literal title match", explanation: "Case-insensitive title substring matching, in alphabetical order. No stemming, relevance ranking, or semantic matching." },
-  { mode: "text", name: "Full-text", hint: "Words in the indexed text", explanation: "Rank passages by matching query terms with BM25. Model names and exact wording can help; a word in the query is not a hard brand filter." },
-  { mode: "vector", name: "Vector", hint: "Nearby meaning", explanation: "Rank passages by embedding similarity. Read the retrieved passage to decide whether it answers the need; similarity does not prove a product meets every requirement." },
-  { mode: "hybrid", name: "Hybrid", hint: "Combine passage rankings", explanation: "Redis combines the full-text and vector passage rankings with reciprocal rank fusion (RRF). Each method then keeps the best passage per product." },
-];
-
-export const sourceLabels: Record<SourceLabel, string> = { E: "Exact", S: "Substitute", C: "Complement", I: "Irrelevant" };
-
-export function formatTime(milliseconds: number): string {
-  return milliseconds < 1000 ? `${milliseconds.toFixed(1)} ms` : `${(milliseconds / 1000).toFixed(2)} s`;
-}
-
-export function fieldName(field: string): string {
-  const names: Record<string, string> = { product_title: "Title", product_description: "Description", product_bullet_point: "Bullet points" };
-  return names[field] ?? field;
-}
+import type { Comparison, Hit, Mode, SourceLabel } from "../shared/api.ts";
+import { formatTime, methods, sourceLabels } from "./methods.ts";
+import type { ProductRank, VisibleCount } from "./ranking.ts";
+import { HighlightedText } from "./HighlightedText.tsx";
+import { ProductPhotoView } from "../shared/ProductPhoto.tsx";
 
 export function RankLabel({ rank, visibleCount, compact = false }: { rank: ProductRank; visibleCount: VisibleCount; compact?: boolean }) {
   if (rank.status === "unavailable") return <span className="rank-unavailable">{compact ? "N/A" : "Unavailable"}</span>;

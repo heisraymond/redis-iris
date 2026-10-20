@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { requestJSON } from "./api";
+import { requestJSON } from "../shared/api.ts";
 
 type Props = { enabled?: boolean; value: string; onChange: (value: string) => void };
 

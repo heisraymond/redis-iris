@@ -5,7 +5,7 @@ import ts from "typescript";
 import * as React from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import * as jsxRuntime from "react/jsx-runtime";
-import * as api from "./api.ts";
+import * as api from "../shared/api.ts";
 import * as shopEvidence from "./shop-evidence.ts";
 import * as cacheEvidence from "./cache-evidence.ts";
 
@@ -25,14 +25,14 @@ function loadComponent(filename, dependencies) {
 
 const dependencies = { react: React, "react/jsx-runtime": jsxRuntime };
 const cacheComponent = loadComponent("./CacheEvidence.tsx", {
-  ...dependencies, "./cache-evidence": cacheEvidence,
+  ...dependencies, "./cache-evidence.ts": cacheEvidence,
 });
 const { ShopInspector } = loadComponent("./ShopInspector.tsx", {
   ...dependencies,
-  "./api": api,
-  "./shop-api": { shopPost: () => { throw new Error("No request should run during rendering"); } },
-  "./shop-evidence": shopEvidence,
-  "./CacheEvidence": cacheComponent,
+  "../shared/api.ts": api,
+  "./shop-api.ts": { shopPost: () => { throw new Error("No request should run during rendering"); } },
+  "./shop-evidence.ts": shopEvidence,
+  "./CacheEvidence.tsx": cacheComponent,
 });
 
 const context = {

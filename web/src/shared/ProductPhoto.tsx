@@ -1,5 +1,5 @@
 import { useState } from "react";
-import type { ProductPhoto } from "./api";
+import type { ProductPhoto } from "./api.ts";
 
 function PhotoPlaceholder({ unavailable }: { unavailable: boolean }) {
   return (

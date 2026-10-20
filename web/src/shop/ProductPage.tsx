@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { errorMessage, requestJSON, type ProductDetail } from "./api";
-import { SiteHeader } from "./SiteHeader";
-import { ProductPhotoView } from "./ProductPhoto";
+import { errorMessage, requestJSON, type ProductDetail } from "../shared/api.ts";
+import { SiteHeader } from "../shared/SiteHeader.tsx";
+import { ProductPhotoView } from "../shared/ProductPhoto.tsx";
 import "./shop.css";
 export function ProductPage({ id }: { id: string }) {
   const [product, setProduct] = useState<ProductDetail | null>(null);

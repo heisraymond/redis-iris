@@ -4,6 +4,7 @@ async (page) => {
   await page.setViewportSize({ width: 1440, height: 1000 });
   await page.goto('http://127.0.0.1:8001');
   await page.locator('#search-query').waitFor();
+  await page.locator('.example-queries button').first().waitFor();
   check(await page.getByRole('heading', { name: 'Find your next camera.' }).count() === 1, 'The landing page should lead with a simple camera search heading');
   check(await page.locator('.method-result').count() === 0, 'Result lists should appear only after a search');
   check(await page.getByRole('button', { name: 'Sony ZV-E10', exact: true }).count() === 1, 'Provide a short example query');

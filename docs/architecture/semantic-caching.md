@@ -21,8 +21,8 @@ shares the local Redis connection and local MiniLM encoder, but uses its own ind
 - `app/shop/prompts.py`: shop and tool-use instructions, kept separate from orchestration.
 - `app/shop/routes.py` and `settings.py`: opt-in construction, request bypass,
   readiness metadata and local presenter removal/reset controls.
-- `web/src/CacheEvidence.tsx`: cache evidence in the existing inspector.
-- `web/src/useShopConversation.ts` and `ShopSettings.tsx`: conversation requests and
+- `web/src/shop/CacheEvidence.tsx`: cache evidence in the existing inspector.
+- `web/src/shop/useShopConversation.ts` and `ShopSettings.tsx`: conversation requests and
   settings respectively; `Shop.tsx` assembles the screen.
 - `eval/cache.py`: labelled synthetic applicability evaluation with no fallback
   generation or invented end-to-end savings.

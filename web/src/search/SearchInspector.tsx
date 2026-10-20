@@ -1,8 +1,9 @@
 import { useEffect, useRef, useState } from "react";
-import { createRequestGate, errorMessage, requestJSON, type Comparison, type FusionEvidence, type Hit, type ProductDetail } from "./api";
-import { highlightSegments, selectionAcrossModes, type VisibleCount } from "./learning";
-import { fieldName, methods, RankLabel, SourceJudgement } from "./results";
-import { ProductPhotoView } from "./ProductPhoto";
+import { createRequestGate, errorMessage, requestJSON, type Comparison, type FusionEvidence, type Hit, type ProductDetail } from "../shared/api.ts";
+import { highlightSegments, selectionAcrossModes, type VisibleCount } from "./ranking.ts";
+import { fieldName, methods } from "./methods.ts";
+import { RankLabel, SourceJudgement } from "./SearchResults.tsx";
+import { ProductPhotoView } from "../shared/ProductPhoto.tsx";
 
 function plainSource(value: string): string {
   const document = new DOMParser().parseFromString(value, "text/html");
@@ -39,7 +40,7 @@ function FusionCalculation({ fusion, score }: { fusion: FusionEvidence | null; s
   </div>;
 }
 
-export function Inspector({ selectedId, comparison, visibleCount, onClose }: {
+export function SearchInspector({ selectedId, comparison, visibleCount, onClose }: {
   selectedId: string; comparison: Comparison; visibleCount: VisibleCount; onClose: () => void;
 }) {
   const heading = useRef<HTMLHeadingElement>(null);

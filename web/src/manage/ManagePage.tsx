@@ -1,9 +1,9 @@
-import { SiteHeader } from "./SiteHeader";
-import { ProductionLab } from "./ProductionLab";
-import { TrafficLab } from "./TrafficLab";
-import { DeploymentLab } from "./DeploymentLab";
+import { SiteHeader } from "../shared/SiteHeader.tsx";
+import { FreshnessLab } from "./FreshnessLab.tsx";
+import { TrafficLab } from "./TrafficLab.tsx";
+import { DeploymentLab } from "./DeploymentLab.tsx";
 
-export function ManageShop() {
+export function ManagePage() {
   function searchProduct(query: string) {
     const params = new URLSearchParams({ view: "compare", q: query });
     window.open(`/?${params}`, "_blank", "noopener,noreferrer");
@@ -17,7 +17,7 @@ export function ManageShop() {
         <p>Update the catalogue. Keep search ready for your customers.</p>
       </header>
       <p className="manage-help">Search buttons open the customer view in a new tab. Keep both tabs open to see how catalogue changes reach search.</p>
-      <ProductionLab initiallyOpen onSearch={searchProduct} />
+      <FreshnessLab initiallyOpen onSearch={searchProduct} />
       <TrafficLab />
       <DeploymentLab />
     </main>

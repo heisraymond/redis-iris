@@ -1,4 +1,4 @@
-import { highlightPreviewSegments, highlightSegments } from "./learning";
+import { highlightPreviewSegments, highlightSegments } from "./ranking.ts";
 
 export function HighlightedText({ text, ranges = [], preview = false }: {
   text: string;

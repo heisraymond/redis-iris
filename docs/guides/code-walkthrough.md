@@ -78,15 +78,15 @@ Streams would transport change events once their source and meaning are defined.
 
 ## The browser tells the same story
 
-Start with [`Shop.tsx`](../../web/src/Shop.tsx), which assembles the screen:
+Start with [`ShopPage.tsx`](../../web/src/shop/ShopPage.tsx), which assembles the screen:
 
 | File | Responsibility |
 | --- | --- |
-| [`useShopConversation.ts`](../../web/src/useShopConversation.ts) | Restore a saved session, send a message, remember the reply and handle failures |
-| [`ShopSettings.tsx`](../../web/src/ShopSettings.tsx) | Shopper, memory mode, cache toggle and scoped cache clearing |
-| [`ShopInspector.tsx`](../../web/src/ShopInspector.tsx) | Retrieved memories and evidence for the selected turn |
-| [`ModelEvidence.tsx`](../../web/src/ModelEvidence.tsx) | Captured model request, source context and tool calls |
-| [`CacheEvidence.tsx`](../../web/src/CacheEvidence.tsx) | Candidate distance, Jev decision, storage outcome and measured timings |
+| [`useShopConversation.ts`](../../web/src/shop/useShopConversation.ts) | Restore a saved session, send a message, remember the reply and handle failures |
+| [`ShopSettings.tsx`](../../web/src/shop/ShopSettings.tsx) | Shopper, memory mode, cache toggle and scoped cache clearing |
+| [`ShopInspector.tsx`](../../web/src/shop/ShopInspector.tsx) | Retrieved memories and evidence for the selected turn |
+| [`ModelEvidence.tsx`](../../web/src/shop/ModelEvidence.tsx) | Captured model request, source context and tool calls |
+| [`CacheEvidence.tsx`](../../web/src/shop/CacheEvidence.tsx) | Candidate distance, Jev decision, storage outcome and measured timings |
 
 Switching shopper remounts conversation state. Cache clearing and chat share a
 busy guard. The inspector distinguishes a fresh model request from reused text

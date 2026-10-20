@@ -8,7 +8,7 @@ Use one local backend process, bound to `127.0.0.1`; these are presenter control
 
 ## 1. Freshness — “We added a camera. Why can't customers find it?”
 
-1. Open **Production lab**.
+1. Open **Freshness lab**.
 2. Click **Pause indexing**.
 3. Add the prefilled fictional Aurora camera. You can change its name first.
 4. Point to **Source: exists**, **0 passages**, and the unread event count.
@@ -110,12 +110,12 @@ clean up the candidate and rebuild while the original continues serving.
 - `app/search/embedding_cache.py`: exact-query vector reuse with bounded memory.
 - `app/ops/traffic.py` / `scripts/search_load.py`: bounded subprocess and HTTP metrics.
 - `app/ops/deployment.py`: version lifecycle, validation, promotion and cleanup.
-- `web/src/ProductionLab.tsx`, `TrafficLab.tsx`, `DeploymentLab.tsx`: collapsed controls.
+- `web/src/manage/FreshnessLab.tsx`, `TrafficLab.tsx`, `DeploymentLab.tsx`: collapsed controls.
 
 ## Verification and boundaries
 
 Run `TEST_REDIS_URL=redis://localhost:6381/0 uv run pytest -q`, `uv run ruff check
-app scripts tests`, `uv run mypy app scripts`, `node --test web/src/*.test.mjs`
+app scripts tests`, `uv run mypy app scripts`, `node --test web/src/**/*.test.mjs`
 and `cd web && npm run build`. The live catalogue test expects the original
 bundle, so reset demo products first. Integration tests use unique namespaces.
 

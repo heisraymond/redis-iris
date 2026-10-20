@@ -1,4 +1,4 @@
-import type { Context, ModelRequest } from "./shop-api";
+import type { Context, ModelRequest } from "./shop-api.ts";
 
 type CapturedMessage = Record<string, unknown>;
 

@@ -1,5 +1,5 @@
 import { useCallback, useEffect, useRef, useState } from "react";
-import { errorMessage, requestJSON } from "./api";
+import { errorMessage, requestJSON } from "../shared/api.ts";
 import "./traffic.css";
 
 type TrafficRun = {
@@ -94,9 +94,9 @@ export function TrafficLab() {
     && current.concurrency === previous.concurrency && current.duration === previous.duration
     && current.workload === previous.workload;
 
-  return <details className="production-lab traffic-lab" open={expanded} onToggle={(event) => setExpanded(event.currentTarget.open)}>
+  return <details className="lab-panel traffic-lab" open={expanded} onToggle={(event) => setExpanded(event.currentTarget.open)}>
     <summary>Performance details {running && <span>· Running</span>}</summary>
-    <div className="production-content traffic-content">
+    <div className="lab-content traffic-content">
       <p>Does search stay responsive when more shoppers arrive? Run the same queries with and without embedding reuse.</p>
       <div className="traffic-controls">
         <label>Concurrent requests<select value={concurrency} disabled={running || busy} onChange={(event) => setConcurrency(Number(event.target.value))}>{[1, 5, 10, 20].map((value) => <option key={value} value={value}>{value}</option>)}</select></label>

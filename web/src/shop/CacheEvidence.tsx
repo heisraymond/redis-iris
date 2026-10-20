@@ -1,10 +1,10 @@
 import { useState, type ReactNode } from "react";
-import type { CacheTrace } from "./shop-api";
+import type { CacheTrace } from "./shop-api.ts";
 import {
   cacheRemovalTargets,
   cosineSimilarity,
   type CacheRemovalTarget,
-} from "./cache-evidence";
+} from "./cache-evidence.ts";
 
 type CacheEvidenceProps = {
   trace?: CacheTrace;

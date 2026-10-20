@@ -1,4 +1,4 @@
-import type { Comparison, Hit, Mode, ModeResult } from "./api";
+import type { Comparison, Hit, Mode, ModeResult } from "../shared/api.ts";
 
 export type VisibleCount = 3 | 5;
 export type ProductRank =

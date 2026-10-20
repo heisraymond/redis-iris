@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { errorMessage, requestJSON } from "./api";
-import { chatFailureMessage, shouldForgetSession } from "./shop-evidence";
+import { errorMessage, requestJSON } from "../shared/api.ts";
+import { chatFailureMessage, shouldForgetSession } from "./shop-evidence.ts";
 import {
   shopPost,
   type MemoryMode,
@@ -8,7 +8,7 @@ import {
   type Shopper,
   type ShopStatus,
   type Turn,
-} from "./shop-api";
+} from "./shop-api.ts";
 
 // Own the saved conversation and its requests. The screen owns display choices.
 export function useShopConversation(

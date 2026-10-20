@@ -1,5 +1,5 @@
 import type { Memory } from "./shop-api.ts";
-import { APIError, errorMessage } from "./api.ts";
+import { APIError, errorMessage } from "../shared/api.ts";
 
 export function chatFailureMessage(error: unknown): string {
   const recovery = error instanceof APIError && error.retrySafe

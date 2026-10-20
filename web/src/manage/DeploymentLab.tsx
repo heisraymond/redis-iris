@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import { errorMessage, requestJSON } from "./api";
-import "./production.css";
+import { errorMessage, requestJSON } from "../shared/api.ts";
+import "./labs.css";
 
 type Deployment = {
   stage: string; active_index: string; candidate_index: string | null; previous_index: string | null;
@@ -34,9 +34,9 @@ export function DeploymentLab() {
     finally { setBusy(false); }
   }
   const working = busy || status?.stage === "building";
-  return <details className="production-lab" onToggle={e => setOpen(e.currentTarget.open)}>
-    <summary><span>Safe deployment</span><span className="production-help">Build → validate → switch</span></summary>
-    <div className="production-content deployment-content">
+  return <details className="lab-panel" onToggle={e => setOpen(e.currentTarget.open)}>
+    <summary><span>Safe deployment</span><span className="lab-help">Build → validate → switch</span></summary>
+    <div className="lab-content deployment-content">
       <p>Build a replacement index while the shop keeps searching. This demo keeps the same embedding model and reuses unchanged vectors. Each index has its own passage records.</p>
       {error && <p role="alert" className="error-box">{error}</p>}
       {status?.error && <p role="alert" className="error-box">{status.error}</p>}
@@ -44,7 +44,7 @@ export function DeploymentLab() {
         <p role="status"><strong>{status.stage}</strong> · {status.completed.toLocaleString()} / {status.total.toLocaleString()} products processed</p>
         {status.stage === "building" && <progress value={status.completed} max={Math.max(status.total, 1)} aria-label="Replacement index build" />}
         <dl><dt>Serving</dt><dd><code>{status.active_index}</code></dd><dt>Replacement</dt><dd><code>{status.candidate_index || "None"}</code></dd><dt>Rollback</dt><dd><code>{status.previous_index || "None"}</code></dd></dl>
-        <div className="production-actions">
+        <div className="lab-actions">
           <button type="button" disabled={working || !!status.candidate_index || !!status.previous_index} onClick={() => void action("build")}>Build replacement</button>
           <button type="button" disabled={working || !status.candidate_index || status.stage === "failed"} onClick={() => void action("validate")}>Validate replacement</button>
           <button type="button" disabled={working || status.stage !== "validated"} onClick={() => void action("switch")}>Switch index</button>

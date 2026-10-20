@@ -1,4 +1,4 @@
-import { requestJSON, type ProductPhoto } from "./api";
+import { requestJSON, type ProductPhoto } from "../shared/api.ts";
 export type Shopper = "alex" | "jordan";
 export type MemoryMode = "none" | "session" | "both";
 export type Memory = {

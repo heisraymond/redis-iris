@@ -1,7 +1,7 @@
 import assert from "node:assert/strict";
 import test from "node:test";
 import { compareMemories, shouldForgetSession } from "./shop-evidence.ts";
-import { APIError } from "./api.ts";
+import { APIError } from "../shared/api.ts";
 
 test("only confirmed missing or mismatched sessions discard the saved ID", () => {
   assert.equal(shouldForgetSession(new APIError(400, "Conversation not found. Start a new conversation.")), true);
@@ -26,7 +26,7 @@ test("unchanged records and timestamp changes do not imply reconciliation", () =
 
 test("confirmed retrieval failures explain safe retry without implying saved events", async () => {
   const { chatFailureMessage } = await import("./shop-evidence.ts");
-  const { APIError } = await import("./api.ts");
+  const { APIError } = await import("../shared/api.ts");
   assert.match(chatFailureMessage(new APIError(503, "Retrieval failed", true)), /No conversation events were saved/);
   assert.match(chatFailureMessage(new Error("Connection lost")), /may have saved session events/);
 });

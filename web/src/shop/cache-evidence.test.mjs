@@ -57,7 +57,7 @@ function renderCache(trace) {
   new Function("require", "module", "exports", compiled)(name => {
     if (name === "react") return React;
     if (name === "react/jsx-runtime") return jsxRuntime;
-    assert.equal(name, "./cache-evidence");
+    assert.equal(name, "./cache-evidence.ts");
     return cacheEvidence;
   }, component, component.exports);
   return renderToStaticMarkup(React.createElement(component.exports.CacheEvidence, {
